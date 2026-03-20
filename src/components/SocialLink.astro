@@ -1,0 +1,40 @@
+---
+const { href, icon, imgSrc, title, color, isExternal = true, platform } = Astro.props;
+---
+
+<a href={href} class="link-item" target={isExternal ? '_blank' : '_self'} data-platform={platform}>
+  <span class="link-icon-wrapper" style={`background: ${color || 'var(--accent-color)'}20;`}>
+    {
+      imgSrc ? (
+        <img src={imgSrc} alt={`${title} logo`} />
+      ) : (
+        <i class={icon} style={`color: ${color};`} />
+      )
+    }
+  </span>
+  <span class="link-title">{title}</span>
+</a>
+
+<style>
+  .link-icon-wrapper {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--warm-brown);
+    box-shadow: 2px 2px 0px var(--warm-brown);
+    transition: all 0.2s ease;
+  }
+  .link-item:hover .link-icon-wrapper {
+    transform: rotate(-10deg) scale(1.1);
+    box-shadow: 3px 3px 0px var(--warm-brown);
+  }
+  .link-title {
+    flex: 1;
+    text-align: center;
+    padding-right: 36px;
+  }
+</style>

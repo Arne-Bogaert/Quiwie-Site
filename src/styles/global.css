@@ -1,0 +1,481 @@
+:root {
+    --bg-color-start: #f5f0e8;
+    --bg-color-end: #e8dcc8;
+    --text-color: #2c2416;
+    --accent-color: #6b7a2e;
+    --accent-light: #8a9e3b;
+    --warm-brown: #8b6f47;
+    --warm-sand: #d4c4a8;
+    --button-bg: rgba(255, 255, 255, 0.75);
+    --button-hover: #ffffff;
+    --border-style: 3px solid #2c2416;
+    --shadow-soft: 4px 4px 0px rgba(44, 36, 22, 0.3);
+    --shadow-hover: 6px 6px 0px rgba(44, 36, 22, 0.35);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+    background: var(--bg-color-start);
+    background-attachment: fixed;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 15% -10%, rgba(107, 122, 46, 0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 50% at 90% 110%, rgba(139, 111, 71, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 60% 40%, rgba(212, 196, 168, 0.2) 0%, transparent 40%),
+        linear-gradient(175deg, var(--bg-color-start) 0%, var(--bg-color-end) 60%, #ddd0b8 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+    box-sizing: border-box;
+    animation: fadeInUp 0.9s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+/* ---- Logo ---- */
+
+.logo-wrapper {
+    margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: var(--shadow-soft);
+    border: 2px solid var(--warm-brown);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-wrapper:hover {
+    transform: rotate(-5deg) scale(1.05);
+    box-shadow: var(--shadow-hover);
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* ---- Band Name ---- */
+
+.band-name {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-top: 0;
+    letter-spacing: 2px;
+    color: var(--text-color);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+    display: inline-block;
+    position: relative;
+    text-shadow: 3px 3px 0px var(--warm-sand), 6px 6px 0px var(--warm-brown);
+}
+
+.band-name:hover {
+    letter-spacing: 5px;
+    color: var(--accent-color);
+    transform: scale(1.1) rotate(-2deg);
+    text-shadow: 4px 4px 0px var(--accent-light), 8px 8px 0px var(--accent-color);
+}
+
+/* ---- Tagline ---- */
+
+.tagline {
+    font-family: 'Comic Neue', cursive;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 28px;
+    margin-top: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ---- Divider ---- */
+
+.divider {
+    width: 80px;
+    height: 4px;
+    background: var(--text-color);
+    margin: 28px auto;
+    border-radius: 4px;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--accent-color);
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.divider::before {
+    left: -20px;
+}
+
+.divider::after {
+    right: -20px;
+}
+
+/* ---- Section Titles ---- */
+
+.section-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--text-color);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: var(--warm-sand);
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid var(--warm-brown);
+    box-shadow: 2px 2px 0px var(--warm-brown);
+}
+
+section {
+    margin-bottom: 25px;
+}
+
+/* ---- SoundCloud ---- */
+
+.soundcloud-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    border: var(--border-style);
+    background: var(--button-bg);
+    height: 120px;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.soundcloud-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ---- Links ---- */
+
+.links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ---- Link items ---- */
+
+.link-item {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 14px 18px;
+    border-radius: 20px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: var(--border-style);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.link-item i {
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.link-item img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.link-item:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-4px) rotate(-1deg) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-color);
+}
+
+/* Spotify - zacht groen */
+.link-item[data-platform="spotify"]:hover {
+    background-color: #b8f0c8;
+    border-color: #1DB954;
+}
+
+/* Instagram - zacht roze */
+.link-item[data-platform="instagram"]:hover {
+    background-color: #ff6b9d;
+    border-color: #E4405F;
+}
+
+/* SoundCloud - zacht oranje */
+.link-item[data-platform="soundcloud"]:hover {
+    background-color: #ff9f43;
+    border-color: #FF5500;
+}
+
+/* VI.BE - zacht paars */
+.link-item[data-platform="vibe"]:hover {
+    background-color: #d4a5e0;
+    border-color: #7B2D8E;
+}
+
+/* Facebook - zacht blauw */
+.link-item[data-platform="facebook"]:hover {
+    background-color: #6bcfff;
+    border-color: #1877F2;
+}
+
+/* Contact/Email - zacht geel */
+.link-item[data-platform="email"]:hover {
+    background-color: #ffd93d;
+    border-color: var(--warm-brown);
+}
+
+.link-item:hover i,
+.link-item:hover img {
+    transform: scale(1.2);
+}
+
+/* ---- Newsletter ---- */
+
+.newsletter-box {
+    margin-top: 10px;
+    padding: 28px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    border: 2px solid var(--warm-brown);
+    box-shadow: var(--shadow-soft);
+}
+
+.newsletter-title {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 6px;
+}
+
+.newsletter-subtitle {
+    font-family: 'Comic Neue', cursive;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 18px;
+    font-weight: 700;
+}
+
+.newsletter-box input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 2px solid var(--warm-brown);
+    border-radius: 14px;
+    box-sizing: border-box;
+    font-family: 'Comic Neue', cursive;
+    font-size: 1rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 3px 3px 0px var(--warm-brown);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletter-box input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--accent-color);
+}
+
+.newsletter-box button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--accent-color);
+    color: #faf9f6;
+    border: 2px solid var(--text-color);
+    border-radius: 14px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    letter-spacing: 0.5px;
+    box-shadow: 3px 3px 0px var(--text-color);
+}
+
+.newsletter-box button:hover {
+    background-color: var(--accent-light);
+    transform: translate(-2px, -2px) rotate(-1deg);
+    box-shadow: 5px 5px 0px var(--text-color);
+}
+
+/* ---- SoundCloud caption ---- */
+
+.sc-caption {
+    font-size: 10px;
+    color: var(--warm-brown);
+    line-break: anywhere;
+    margin-top: 8px;
+    font-family: Interstate, sans-serif;
+    opacity: 0.7;
+}
+
+.sc-caption a {
+    color: var(--warm-brown);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.sc-caption a:hover {
+    color: var(--accent-color);
+}
+
+/* ---- Float animation ---- */
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.logo-wrapper {
+    animation: float 5s ease-in-out infinite;
+}
+
+/* ---- Scroll reveal ---- */
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered delays for links */
+.links-list .link-item:nth-child(1) { transition-delay: 0s; }
+.links-list .link-item:nth-child(2) { transition-delay: 0.06s; }
+.links-list .link-item:nth-child(3) { transition-delay: 0.12s; }
+.links-list .link-item:nth-child(4) { transition-delay: 0.18s; }
+.links-list .link-item:nth-child(5) { transition-delay: 0.24s; }
+.links-list .link-item:nth-child(6) { transition-delay: 0.30s; }
+
+/* ---- Footer ---- */
+
+.site-footer {
+    margin-top: 30px;
+    padding: 20px 0 10px;
+    text-align: center;
+}
+
+.site-footer p {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* ---- Noise texture overlay ---- */
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+}

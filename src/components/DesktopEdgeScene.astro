@@ -1,0 +1,446 @@
+<div class="edge-scene" aria-hidden="true">
+  <canvas class="edge-scene__canvas"></canvas>
+</div>
+
+<style>
+  .edge-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .edge-scene.is-ready {
+    opacity: 1;
+  }
+
+  .edge-scene__canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media (max-width: 899px) {
+    .edge-scene {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import * as THREE from 'three';
+
+  const root = document.querySelector('.edge-scene');
+  const canvas = root?.querySelector('canvas');
+  const desktopQuery = window.matchMedia('(min-width: 900px)');
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (!root || !canvas || !desktopQuery.matches) {
+    root?.remove();
+  } else {
+    const random = (() => {
+      let seed = 20260320;
+
+      return () => {
+        seed |= 0;
+        seed = (seed + 0x6d2b79f5) | 0;
+        let value = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        value = (value + Math.imul(value ^ (value >>> 7), 61 | value)) ^ value;
+
+        return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+      };
+    })();
+
+    const textures = [];
+    const materials = [];
+    const notes = [];
+    let frameId = 0;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 20);
+    camera.position.z = 10;
+
+    const planeGeometry = new THREE.PlaneGeometry(1, 1);
+    const notePalette = [
+      { fill: '#d4c4a8', glow: '#ebe1cd', ink: '#6b7a2e', highlight: '#f7f1e7' },
+      { fill: '#e7d8bf', glow: '#f1e7d6', ink: '#8b6f47', highlight: '#fcf7ef' },
+      { fill: '#c5d39a', glow: '#dde8bc', ink: '#56621f', highlight: '#f0f5df' },
+      { fill: '#dcc9ae', glow: '#ebdfcd', ink: '#705938', highlight: '#faf3e6' },
+    ];
+    const noteKinds = ['single', 'double', 'quarter', 'eighth'];
+    const viewHeight = 16;
+    const sidePadding = 0.7;
+
+    const registerMaterial = (material) => {
+      materials.push(material);
+      return material;
+    };
+
+    const createTexture = (painter) => {
+      const textureCanvas = document.createElement('canvas');
+      textureCanvas.width = 256;
+      textureCanvas.height = 256;
+      const ctx = textureCanvas.getContext('2d');
+
+      if (!ctx) {
+        return null;
+      }
+
+      painter(ctx, textureCanvas.width, textureCanvas.height);
+
+      const texture = new THREE.CanvasTexture(textureCanvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.needsUpdate = true;
+      textures.push(texture);
+
+      return texture;
+    };
+
+    const strokeNote = (ctx, drawPath, colors) => {
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      ctx.strokeStyle = colors.glow;
+      ctx.lineWidth = 22;
+      ctx.shadowColor = colors.glow;
+      ctx.shadowBlur = 24;
+      drawPath();
+      ctx.stroke();
+
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = colors.ink;
+      ctx.lineWidth = 13;
+      drawPath();
+      ctx.stroke();
+
+      ctx.strokeStyle = colors.highlight;
+      ctx.lineWidth = 6;
+      ctx.globalAlpha = 0.95;
+      drawPath();
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    };
+
+    const fillHead = (ctx, drawHead, colors) => {
+      ctx.fillStyle = colors.fill;
+      drawHead();
+      ctx.fill();
+
+      ctx.strokeStyle = colors.ink;
+      ctx.lineWidth = 5;
+      drawHead();
+      ctx.stroke();
+
+      ctx.strokeStyle = colors.highlight;
+      ctx.lineWidth = 2.5;
+      ctx.globalAlpha = 0.9;
+      drawHead();
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    };
+
+    const drawSingleEighth = (ctx, width, height, colors) => {
+      ctx.clearRect(0, 0, width, height);
+      strokeNote(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.moveTo(width * 0.54, height * 0.2);
+          ctx.lineTo(width * 0.54, height * 0.68);
+          ctx.quadraticCurveTo(width * 0.73, height * 0.35, width * 0.78, height * 0.28);
+        },
+        colors,
+      );
+
+      fillHead(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.ellipse(width * 0.43, height * 0.74, width * 0.12, height * 0.085, -0.45, 0, Math.PI * 2);
+        },
+        colors,
+      );
+    };
+
+    const drawQuarterNote = (ctx, width, height, colors) => {
+      ctx.clearRect(0, 0, width, height);
+      strokeNote(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.moveTo(width * 0.57, height * 0.16);
+          ctx.lineTo(width * 0.57, height * 0.7);
+        },
+        colors,
+      );
+
+      fillHead(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.ellipse(width * 0.43, height * 0.75, width * 0.13, height * 0.095, -0.4, 0, Math.PI * 2);
+        },
+        colors,
+      );
+    };
+
+    const drawDoubleEighth = (ctx, width, height, colors) => {
+      ctx.clearRect(0, 0, width, height);
+      strokeNote(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.moveTo(width * 0.42, height * 0.22);
+          ctx.lineTo(width * 0.42, height * 0.66);
+          ctx.moveTo(width * 0.67, height * 0.18);
+          ctx.lineTo(width * 0.67, height * 0.6);
+          ctx.quadraticCurveTo(width * 0.58, height * 0.28, width * 0.42, height * 0.28);
+        },
+        colors,
+      );
+
+      fillHead(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.ellipse(width * 0.32, height * 0.74, width * 0.12, height * 0.085, -0.45, 0, Math.PI * 2);
+          ctx.ellipse(width * 0.58, height * 0.68, width * 0.12, height * 0.085, -0.45, 0, Math.PI * 2);
+        },
+        colors,
+      );
+    };
+
+    const drawSoftEighth = (ctx, width, height, colors) => {
+      ctx.clearRect(0, 0, width, height);
+      strokeNote(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.moveTo(width * 0.51, height * 0.18);
+          ctx.bezierCurveTo(width * 0.55, height * 0.42, width * 0.48, height * 0.58, width * 0.44, height * 0.7);
+          ctx.bezierCurveTo(width * 0.63, height * 0.55, width * 0.74, height * 0.38, width * 0.7, height * 0.24);
+        },
+        colors,
+      );
+
+      fillHead(
+        ctx,
+        () => {
+          ctx.beginPath();
+          ctx.ellipse(width * 0.34, height * 0.77, width * 0.13, height * 0.09, -0.55, 0, Math.PI * 2);
+        },
+        colors,
+      );
+    };
+
+    const createNoteTexture = (kind, colors) =>
+      createTexture((ctx, width, height) => {
+        switch (kind) {
+          case 'double':
+            drawDoubleEighth(ctx, width, height, colors);
+            break;
+          case 'quarter':
+            drawQuarterNote(ctx, width, height, colors);
+            break;
+          case 'eighth':
+            drawSoftEighth(ctx, width, height, colors);
+            break;
+          default:
+            drawSingleEighth(ctx, width, height, colors);
+            break;
+        }
+      });
+
+    const createGlowTexture = (colors) =>
+      createTexture((ctx, width, height) => {
+        const gradient = ctx.createRadialGradient(
+          width / 2,
+          height / 2,
+          width * 0.04,
+          width / 2,
+          height / 2,
+          width * 0.32,
+        );
+        gradient.addColorStop(0, `${colors.glow}74`);
+        gradient.addColorStop(0.5, `${colors.glow}22`);
+        gradient.addColorStop(1, `${colors.glow}00`);
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(width / 2, height / 2, width * 0.28, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+    const spawnNote = (index) => {
+      const colors = notePalette[index % notePalette.length];
+      const kind = noteKinds[index % noteKinds.length];
+      const noteTexture = createNoteTexture(kind, colors);
+      const glowTexture = createGlowTexture(colors);
+
+      if (!noteTexture || !glowTexture) {
+        return;
+      }
+
+      const group = new THREE.Group();
+      const glow = new THREE.Mesh(
+        planeGeometry,
+        registerMaterial(
+          new THREE.MeshBasicMaterial({
+            map: glowTexture,
+            transparent: true,
+            opacity: 0.65,
+            depthWrite: false,
+          }),
+        ),
+      );
+      const body = new THREE.Mesh(
+        planeGeometry,
+        registerMaterial(
+          new THREE.MeshBasicMaterial({
+            map: noteTexture,
+            transparent: true,
+            depthWrite: false,
+          }),
+        ),
+      );
+
+      const scale = 1.1 + random() * 1.45;
+      const aspect = kind === 'double' ? 1.1 : 0.86;
+      const yFactor = -0.92 + random() * 1.84;
+
+      glow.scale.set(scale * 2.25, scale * 2.25, 1);
+      body.scale.set(scale * aspect, scale, 1);
+      glow.position.z = -0.08;
+      body.position.z = 0;
+      group.add(glow);
+      group.add(body);
+      scene.add(group);
+
+      notes.push({
+        group,
+        glow,
+        body,
+        scale,
+        aspect,
+        yFactor,
+        baseX: 0,
+        baseY: 0,
+        travelOffset: index / desiredCount,
+        travelSpeed: 0.018 + random() * 0.016,
+        yAmplitude: 0.22 + random() * 0.95,
+        driftSpeedY: 0.12 + random() * 0.24,
+        phaseY: random() * Math.PI * 2,
+        rotationBase: -0.7 + random() * 1.4,
+        rotationAmount: 0.14 + random() * 0.24,
+        rotationSpeed: 0.3 + random() * 0.4,
+        shimmerSpeed: 1 + random() * 0.8,
+        shimmerAmount: 0.1 + random() * 0.08,
+      });
+    };
+
+    const desiredCount = 18;
+    for (let index = 0; index < desiredCount; index += 1) {
+      spawnNote(index);
+    }
+
+    const setSize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const aspect = width / height;
+      const halfHeight = viewHeight / 2;
+      const halfWidth = halfHeight * aspect;
+
+      renderer.setSize(width, height, false);
+
+      camera.left = -halfWidth;
+      camera.right = halfWidth;
+      camera.top = halfHeight;
+      camera.bottom = -halfHeight;
+      camera.updateProjectionMatrix();
+
+      notes.forEach((note) => {
+        note.baseX = camera.left + sidePadding;
+        note.baseY = note.yFactor * halfHeight;
+        note.group.position.set(note.baseX, note.baseY, 0);
+      });
+    };
+
+    const animate = (time) => {
+      const seconds = time * 0.001;
+      const motion = reducedMotionQuery.matches ? 0.2 : 1;
+      const travelLeft = camera.left - 1.2;
+      const travelRight = camera.right + 1.2;
+      const travelWidth = travelRight - travelLeft;
+
+      notes.forEach((note) => {
+        const driftY =
+          Math.cos(seconds * note.driftSpeedY + note.phaseY) *
+          note.yAmplitude *
+          motion;
+        const shimmer =
+          1 +
+          Math.sin(seconds * note.shimmerSpeed + note.phaseY) *
+            note.shimmerAmount *
+            motion;
+        const travelProgress =
+          (note.travelOffset + seconds * note.travelSpeed * motion + 1) % 1;
+
+        note.group.position.x = travelLeft + travelProgress * travelWidth;
+        note.group.position.y = note.baseY + driftY;
+        note.group.rotation.z =
+          note.rotationBase +
+          Math.sin(seconds * note.rotationSpeed + note.phaseY) *
+            note.rotationAmount *
+            motion;
+
+        note.body.scale.set(note.scale * note.aspect * shimmer, note.scale * shimmer, 1);
+        note.glow.scale.set(note.scale * 2.25 * shimmer, note.scale * 2.25 * shimmer, 1);
+        note.glow.material.opacity = 0.34 + shimmer * 0.24;
+      });
+
+      renderer.render(scene, camera);
+      frameId = window.requestAnimationFrame(animate);
+    };
+
+    const cleanup = () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener('resize', setSize);
+      desktopQuery.removeEventListener('change', handleMediaChange);
+      renderer.dispose();
+      materials.forEach((material) => material.dispose());
+      textures.forEach((texture) => texture.dispose());
+      planeGeometry.dispose();
+    };
+
+    const handleMediaChange = (event) => {
+      if (!event.matches) {
+        cleanup();
+        root.remove();
+      }
+    };
+
+    setSize();
+    root.classList.add('is-ready');
+    frameId = window.requestAnimationFrame(animate);
+
+    window.addEventListener('resize', setSize);
+    desktopQuery.addEventListener('change', handleMediaChange);
+    window.addEventListener(
+      'beforeunload',
+      () => {
+        cleanup();
+      },
+      { once: true },
+    );
+  }
+</script>

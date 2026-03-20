@@ -1,0 +1,91 @@
+---
+const tours = await Astro.glob('../content/tours/*.md');
+const sortedTours = tours.sort(
+  (a, b) =>
+    new Date(a.frontmatter.datum).getTime() -
+    new Date(b.frontmatter.datum).getTime(),
+);
+---
+
+<div class="tour-list">
+  {
+    sortedTours.map((tour) => (
+      <div class="tour-item scroll-reveal">
+        <div class="tour-info">
+          <span class="tour-date">
+            {new Date(tour.frontmatter.datum).toLocaleDateString('nl-BE')}
+          </span>
+          <span class="tour-location">{tour.frontmatter.locatie}</span>
+        </div>
+        <a href={tour.frontmatter.tickets} target="_blank" class="tour-btn">
+          Info&Tickets
+        </a>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .tour-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+  .tour-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--button-bg);
+    border: 2px solid var(--warm-brown);
+    border-radius: 18px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .tour-item:hover {
+    transform: translateY(-4px) rotate(-1deg);
+    box-shadow: var(--shadow-hover);
+    background: var(--button-hover);
+    border-color: var(--accent-color);
+  }
+  .tour-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+  }
+  .tour-date {
+    font-family: 'Comic Neue', cursive;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .tour-location {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+  .tour-btn {
+    background: var(--accent-color);
+    color: #faf9f6;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 14px;
+    border: 2px solid var(--text-color);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+    box-shadow: 2px 2px 0px var(--warm-brown);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    white-space: nowrap;
+  }
+  .tour-btn:hover {
+    background: var(--accent-light);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px var(--warm-brown);
+  }
+</style>

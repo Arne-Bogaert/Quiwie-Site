@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/layout.astro';
+import SocialLink from '../components/SocialLink.astro';
+import TourList from '../components/TourList.astro';
+---
+
+<Layout title="Quiwie - Linktree">
+  <style>
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background: var(--accent-color);
+      color: #faf9f6;
+      padding: 14px 0;
+      margin-bottom: 30px;
+      border-radius: 20px;
+      white-space: nowrap;
+      border: 3px solid var(--text-color);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-text 18s linear infinite;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+    }
+
+    @keyframes scroll-text {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(-100%, 0, 0);
+      }
+    }
+    .marquee-container:hover .marquee-content {
+      animation-play-state: paused;
+      cursor: default;
+    }
+
+    .marquee-container:hover {
+      transform: rotate(-1deg);
+      box-shadow: var(--shadow-hover);
+    }
+  </style>
+
+  <div class="container">
+    <div class="logo-wrapper">
+      <span class="logo-text">Coming<br />Soon</span>
+    </div>
+
+    <h1 class="band-name">Quiwie</h1>
+
+    <div class="marquee-container scroll-reveal">
+      <div class="marquee-content">
+        Hallo wij zijn quiwie wij maken leuke muziekjes, kom kijken naar onze
+        shows!
+      </div>
+    </div>
+
+    <section id="tour-dates" class="scroll-reveal">
+      <h2 class="section-title">Concerten</h2>
+      <TourList />
+    </section>
+
+    <div class="divider scroll-reveal"></div>
+
+    <div class="release-header scroll-reveal">
+      <h2 class="section-title">Laatste release</h2>
+    </div>
+
+    <section class="soundcloud-wrapper scroll-reveal">
+      <iframe
+        width="100%"
+        height="120"
+        frameborder="no"
+        allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2245918166&color=%23899447&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&show_artwork=false"
+      ></iframe>
+      <div class="sc-caption">
+        <a href="https://soundcloud.com/quiwie" title="Quiwie" target="_blank"
+          >Quiwie</a
+        > ·
+        <a
+          href="https://soundcloud.com/quiwie/waarisdietijd-demo"
+          title="WaarIsDieTijd (Demo)"
+          target="_blank">WaarIsDieTijd (Demo)</a
+        >
+      </div>
+    </section>
+
+    <div class="divider scroll-reveal"></div>
+
+    <div class="release-header scroll-reveal">
+      <h2 class="section-title">Links</h2>
+    </div>
+    <section class="links-list scroll-reveal">
+      <SocialLink
+        href="/coming-soon"
+        icon="fab fa-spotify"
+        title="Spotify (Coming soon)"
+        color="#1DB954"
+        isExternal={false}
+        platform="spotify"
+      />
+      <SocialLink
+        href="https://instagram.com/quiwie.band"
+        icon="fab fa-instagram"
+        title="Instagram"
+        color="#E4405F"
+        platform="instagram"
+      />
+      <SocialLink
+        href="https://soundcloud.com/quiwie"
+        icon="fab fa-soundcloud"
+        title="SoundCloud"
+        color="#FF5500"
+        platform="soundcloud"
+      />
+      <SocialLink
+        href="https://vi.be/platform/Quiwie"
+        imgSrc="https://vi.be/favicon.ico"
+        title="VI.BE"
+        platform="vibe"
+      />
+      <SocialLink
+        href="https://facebook.com/quiwie"
+        icon="fab fa-facebook"
+        title="Facebook"
+        color="#1877F2"
+        platform="facebook"
+      />
+      <SocialLink
+        href="mailto:quiwieband@gmail.com"
+        icon="fas fa-envelope"
+        title="Boekingen & Contact"
+        color="var(--text-color)"
+        platform="email"
+      />
+    </section>
+
+    <div class="divider scroll-reveal"></div>
+
+    <section class="newsletter-box scroll-reveal">
+      <p class="newsletter-title">Mis niks van Quiwie</p>
+      <p class="newsletter-subtitle">
+        Schrijf je in en wij houden je op de hoogte van alle laatste nieuwtjes
+      </p>
+      <form action="#" method="POST">
+        <input
+          type="email"
+          name="email"
+          placeholder="Je e-mailadres"
+          required
+        />
+        <button type="submit">Blijf op de hoogte</button>
+      </form>
+    </section>
+
+    <footer class="site-footer scroll-reveal">
+      <p>&copy; 2026 Quiwie</p>
+    </footer>
+  </div>
+</Layout>

@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import DesktopEdgeScene from '../components/DesktopEdgeScene.astro';
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥝</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <DesktopEdgeScene />
+
+    <div class="site-shell">
+      <slot />
+    </div>
+
+    <style>
+      .site-shell {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+
+    <script>
+      const observerOptions = {
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll('.scroll-reveal')
+        .forEach((el) => observer.observe(el));
+
+      // Staggered reveal for link items inside .links-list
+      const linksList = document.querySelector('.links-list');
+      if (linksList) {
+        const linkObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const items = entry.target.querySelectorAll('.link-item');
+              items.forEach((item, i) => {
+                setTimeout(() => {
+                  item.style.opacity = '1';
+                  item.style.transform = 'translateY(0)';
+                }, i * 80);
+              });
+              linkObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        linkObserver.observe(linksList);
+
+        // Set initial state for link items
+        linksList.querySelectorAll('.link-item').forEach((item) => {
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(15px)';
+          item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        });
+      }
+    </script>
+  </body>
+</html>
