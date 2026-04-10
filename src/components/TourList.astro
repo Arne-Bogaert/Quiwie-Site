@@ -1,9 +1,11 @@
 ---
-const tours = await Astro.glob('../content/tours/*.md');
+import { getCollection } from 'astro:content';
+
+const tours = await getCollection('tours');
 const sortedTours = tours.sort(
   (a, b) =>
-    new Date(a.frontmatter.datum).getTime() -
-    new Date(b.frontmatter.datum).getTime(),
+    new Date(a.data.datum).getTime() -
+    new Date(b.data.datum).getTime(),
 );
 ---
 
@@ -13,11 +15,11 @@ const sortedTours = tours.sort(
       <div class="tour-item scroll-reveal">
         <div class="tour-info">
           <span class="tour-date">
-            {new Date(tour.frontmatter.datum).toLocaleDateString('nl-BE')}
+            {new Date(tour.data.datum).toLocaleDateString('nl-BE')}
           </span>
-          <span class="tour-location">{tour.frontmatter.locatie}</span>
+          <span class="tour-location">{tour.data.locatie}</span>
         </div>
-        <a href={tour.frontmatter.tickets} target="_blank" class="tour-btn">
+        <a href={tour.data.tickets} target="_blank" class="tour-btn">
           Info&Tickets
         </a>
       </div>
