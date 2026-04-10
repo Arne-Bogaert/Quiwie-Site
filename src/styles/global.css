@@ -108,6 +108,28 @@ body::before {
     line-height: 1.2;
 }
 
+/* ---- Header Logo ---- */
+
+.logo-header {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    animation: float 5s ease-in-out infinite;
+}
+
+.header-logo {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(3px 3px 0px var(--warm-sand)) drop-shadow(6px 6px 0px var(--warm-brown));
+}
+
+.header-logo:hover {
+    transform: scale(1.05) rotate(-2deg);
+    filter: drop-shadow(4px 4px 0px var(--accent-light)) drop-shadow(8px 8px 0px var(--accent-color));
+}
+
 /* ---- Band Name ---- */
 
 .band-name {
