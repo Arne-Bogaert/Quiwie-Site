@@ -1,20 +1,17 @@
 :root {
-    /* Industrial Harbor palette */
-    --bg-color-start: #e8e2d9;
-    --bg-color-end: #d9d0c3;
-    --text-color: #1a1a1a;
-    --accent-color: #c41e3a;
-    --accent-light: #d63a52;
-    --warm-brown: #4a4035;
-    --warm-sand: #b8a892;
-    --industrial-blue: #2d4a5e;
-    --industrial-rust: #8b4513;
-    --industrial-steel: #6b7280;
-    --button-bg: rgba(255, 255, 255, 0.85);
+    /* Original warm collage palette */
+    --bg-color-start: #f5f0e8;
+    --bg-color-end: #e8dcc8;
+    --text-color: #2c2416;
+    --accent-color: #6b7a2e;
+    --accent-light: #8a9e3b;
+    --warm-brown: #8b6f47;
+    --warm-sand: #d4c4a8;
+    --button-bg: rgba(255, 255, 255, 0.75);
     --button-hover: #ffffff;
-    --border-style: 3px solid #1a1a1a;
-    --shadow-soft: 4px 4px 0px rgba(26, 26, 26, 0.25);
-    --shadow-hover: 6px 6px 0px rgba(26, 26, 26, 0.3);
+    --border-style: 3px solid #2c2416;
+    --shadow-soft: 4px 4px 0px rgba(44, 36, 22, 0.3);
+    --shadow-hover: 6px 6px 0px rgba(44, 36, 22, 0.35);
 }
 
 @keyframes fadeInUp {
@@ -281,39 +278,39 @@ section {
     border-color: var(--accent-color);
 }
 
-/* Spotify - industrial green */
+/* Spotify - soft green */
 .link-item[data-platform="spotify"]:hover {
-    background-color: #c8e6c9;
+    background-color: #b8f0c8;
     border-color: #1DB954;
 }
 
-/* Instagram - muted pink */
+/* Instagram - soft pink */
 .link-item[data-platform="instagram"]:hover {
-    background-color: #f8bbd9;
+    background-color: #ff6b9d;
     border-color: #E4405F;
 }
 
-/* SoundCloud - rust orange */
+/* SoundCloud - soft orange */
 .link-item[data-platform="soundcloud"]:hover {
-    background-color: #ffcc80;
+    background-color: #ff9f43;
     border-color: #FF5500;
 }
 
-/* VI.BE - steel purple */
+/* VI.BE - soft purple */
 .link-item[data-platform="vibe"]:hover {
-    background-color: #d1c4e9;
+    background-color: #d4a5e0;
     border-color: #7B2D8E;
 }
 
-/* Facebook - harbor blue */
+/* Facebook - soft blue */
 .link-item[data-platform="facebook"]:hover {
-    background-color: #b3d4fc;
+    background-color: #6bcfff;
     border-color: #1877F2;
 }
 
-/* Contact/Email - warm cream */
+/* Contact/Email - soft yellow */
 .link-item[data-platform="email"]:hover {
-    background-color: #fff3cd;
+    background-color: #ffd93d;
     border-color: var(--warm-brown);
 }
 

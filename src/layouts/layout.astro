@@ -3,6 +3,7 @@ import '../styles/global.css';
 import DesktopEdgeScene from '../components/DesktopEdgeScene.astro';
 import CollageBackground from '../components/CollageBackground.astro';
 const { title } = Astro.props;
+const showDesktopEdgeScene = false;
 ---
 
 <!doctype html>
@@ -25,7 +26,7 @@ const { title } = Astro.props;
 </head>
 <body>
 <CollageBackground />
-<DesktopEdgeScene />
+{showDesktopEdgeScene && <DesktopEdgeScene />}
 
 <div class="site-shell">
   <slot />
