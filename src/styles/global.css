@@ -1,16 +1,20 @@
 :root {
-    --bg-color-start: #f5f0e8;
-    --bg-color-end: #e8dcc8;
-    --text-color: #2c2416;
-    --accent-color: #6b7a2e;
-    --accent-light: #8a9e3b;
-    --warm-brown: #8b6f47;
-    --warm-sand: #d4c4a8;
-    --button-bg: rgba(255, 255, 255, 0.75);
+    /* Industrial Harbor palette */
+    --bg-color-start: #e8e2d9;
+    --bg-color-end: #d9d0c3;
+    --text-color: #1a1a1a;
+    --accent-color: #c41e3a;
+    --accent-light: #d63a52;
+    --warm-brown: #4a4035;
+    --warm-sand: #b8a892;
+    --industrial-blue: #2d4a5e;
+    --industrial-rust: #8b4513;
+    --industrial-steel: #6b7280;
+    --button-bg: rgba(255, 255, 255, 0.85);
     --button-hover: #ffffff;
-    --border-style: 3px solid #2c2416;
-    --shadow-soft: 4px 4px 0px rgba(44, 36, 22, 0.3);
-    --shadow-hover: 6px 6px 0px rgba(44, 36, 22, 0.35);
+    --border-style: 3px solid #1a1a1a;
+    --shadow-soft: 4px 4px 0px rgba(26, 26, 26, 0.25);
+    --shadow-hover: 6px 6px 0px rgba(26, 26, 26, 0.3);
 }
 
 @keyframes fadeInUp {
@@ -27,8 +31,7 @@
 
 body {
     font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
-    background: var(--bg-color-start);
-    background-attachment: fixed;
+    background: transparent;
     color: var(--text-color);
     margin: 0;
     padding: 0;
@@ -37,22 +40,6 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        radial-gradient(ellipse 80% 60% at 15% -10%, rgba(107, 122, 46, 0.14) 0%, transparent 60%),
-        radial-gradient(ellipse 70% 50% at 90% 110%, rgba(139, 111, 71, 0.12) 0%, transparent 55%),
-        radial-gradient(circle at 60% 40%, rgba(212, 196, 168, 0.2) 0%, transparent 40%),
-        linear-gradient(175deg, var(--bg-color-start) 0%, var(--bg-color-end) 60%, #ddd0b8 100%);
-    z-index: -1;
-    pointer-events: none;
 }
 
 .container {
@@ -208,11 +195,11 @@ body::before {
     color: var(--text-color);
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     background: var(--warm-sand);
     display: inline-block;
     padding: 6px 16px;
-    border-radius: 20px;
+    border-radius: 4px;
     border: 2px solid var(--warm-brown);
     box-shadow: 2px 2px 0px var(--warm-brown);
 }
@@ -224,7 +211,7 @@ section {
 /* ---- SoundCloud ---- */
 
 .soundcloud-wrapper {
-    border-radius: 20px;
+    border-radius: 6px;
     overflow: hidden;
     border: var(--border-style);
     background: var(--button-bg);
@@ -253,7 +240,7 @@ section {
     color: var(--text-color);
     text-decoration: none;
     padding: 14px 18px;
-    border-radius: 20px;
+    border-radius: 6px;
     font-family: 'Fredoka', sans-serif;
     font-weight: 500;
     font-size: 1rem;
@@ -294,39 +281,39 @@ section {
     border-color: var(--accent-color);
 }
 
-/* Spotify - zacht groen */
+/* Spotify - industrial green */
 .link-item[data-platform="spotify"]:hover {
-    background-color: #b8f0c8;
+    background-color: #c8e6c9;
     border-color: #1DB954;
 }
 
-/* Instagram - zacht roze */
+/* Instagram - muted pink */
 .link-item[data-platform="instagram"]:hover {
-    background-color: #ff6b9d;
+    background-color: #f8bbd9;
     border-color: #E4405F;
 }
 
-/* SoundCloud - zacht oranje */
+/* SoundCloud - rust orange */
 .link-item[data-platform="soundcloud"]:hover {
-    background-color: #ff9f43;
+    background-color: #ffcc80;
     border-color: #FF5500;
 }
 
-/* VI.BE - zacht paars */
+/* VI.BE - steel purple */
 .link-item[data-platform="vibe"]:hover {
-    background-color: #d4a5e0;
+    background-color: #d1c4e9;
     border-color: #7B2D8E;
 }
 
-/* Facebook - zacht blauw */
+/* Facebook - harbor blue */
 .link-item[data-platform="facebook"]:hover {
-    background-color: #6bcfff;
+    background-color: #b3d4fc;
     border-color: #1877F2;
 }
 
-/* Contact/Email - zacht geel */
+/* Contact/Email - warm cream */
 .link-item[data-platform="email"]:hover {
-    background-color: #ffd93d;
+    background-color: #fff3cd;
     border-color: var(--warm-brown);
 }
 
@@ -340,8 +327,8 @@ section {
 .newsletter-box {
     margin-top: 10px;
     padding: 28px 24px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
     border: 2px solid var(--warm-brown);
     box-shadow: var(--shadow-soft);
 }
@@ -367,7 +354,7 @@ section {
     padding: 14px;
     margin-bottom: 12px;
     border: 2px solid var(--warm-brown);
-    border-radius: 14px;
+    border-radius: 4px;
     box-sizing: border-box;
     font-family: 'Comic Neue', cursive;
     font-size: 1rem;
@@ -390,13 +377,14 @@ section {
     background-color: var(--accent-color);
     color: #faf9f6;
     border: 2px solid var(--text-color);
-    border-radius: 14px;
+    border-radius: 4px;
     font-family: 'Fredoka', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     box-shadow: 3px 3px 0px var(--text-color);
 }
 
@@ -485,19 +473,4 @@ section {
     margin: 0;
 }
 
-/* ---- Noise texture overlay ---- */
-
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 256px 256px;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-}
+/* ---- Noise texture overlay removed - handled by CollageBackground ---- */

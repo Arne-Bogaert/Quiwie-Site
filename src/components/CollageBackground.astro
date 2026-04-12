@@ -1,0 +1,418 @@
+---
+// Collage Background - Industrial Ghent Harbor aesthetic
+// Combines user-provided collage artwork with generated harbor elements
+---
+
+<div class="collage-background" aria-hidden="true">
+  <!-- Layer 1: Base texture -->
+  <div class="collage-layer collage-texture"></div>
+  
+  <!-- Layer 2: User collage images scattered around -->
+  <div class="collage-layer collage-images">
+    <!-- Peter Horvath collage - top left -->
+    <div class="collage-item item-1">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fig%207_%20Peter%20Horvath%2C%20Something%20Has%20Always%20Been%20Missing%2C%202019-nuSGYWqwsnkoXViGUBjH6gAveXffnG.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+    
+    <!-- Stars collage - top right -->
+    <div class="collage-item item-2">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/download%20%281%29-r9LGHABxNU0ywfJOETFrWvtlcLFdri.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+    
+    <!-- Bonfanti stitched figure - left side -->
+    <div class="collage-item item-3">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Bonfanti-z3i1gymK3jqQEHgSDYyVfLNHYPLTVM.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+    
+    <!-- Abstract blue figures - right side -->
+    <div class="collage-item item-4">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/download%20%282%29-HvFriCGJQmN6GGqaSt3i1nn6fWl6gV.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+    
+    <!-- Surreal vintage - bottom left -->
+    <div class="collage-item item-5">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/_aesthetic%20_collage%20_myfirstshuffle%20_vintage%20_art%20_autumn%20_dark-eG3DLWw7xUsqGECim6zx1Gtvozm9Lp.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+    
+    <!-- Red retro tech - bottom right -->
+    <div class="collage-item item-6">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/download-uGYo29SeJH8NKI4pISt06rN8zTeW0V.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+    
+    <!-- Ingrid Knap stars - middle left -->
+    <div class="collage-item item-7">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%27I%20see%20stars%20in%20your%20eyes%27%20artwork%20by%20ingrid%20knap%20_collage%20_art-uXe2iXb0U6iSeyIUccSHkcchjJIr9p.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+    
+    <!-- Magazine collage silhouettes - middle right -->
+    <div class="collage-item item-8">
+      <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/_art%20_artist%20_collage%20_magazinecollage_-Ca6bzOj9BvNLlHZs01j3Qi70NVMPje.jpg" 
+        alt="" 
+        loading="lazy"
+      />
+    </div>
+  </div>
+  
+  <!-- Layer 3: Industrial SVG elements (harbor cranes, containers, etc.) -->
+  <div class="collage-layer collage-industrial">
+    <!-- Crane silhouettes -->
+    <svg class="industrial-element crane-1" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 300V50M60 50H140M100 50L180 20M180 20V40M180 30H200M20 100H180M40 100V280H60V100M140 100V280H160V100" stroke="currentColor" stroke-width="4"/>
+    </svg>
+    
+    <svg class="industrial-element crane-2" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 300V50M60 50H140M100 50L20 20M20 20V40M0 30H20M20 100H180M40 100V280H60V100M140 100V280H160V100" stroke="currentColor" stroke-width="4"/>
+    </svg>
+    
+    <!-- Container shapes -->
+    <div class="container-stack stack-1">
+      <div class="container-box"></div>
+      <div class="container-box"></div>
+      <div class="container-box"></div>
+    </div>
+    
+    <div class="container-stack stack-2">
+      <div class="container-box"></div>
+      <div class="container-box"></div>
+    </div>
+    
+    <!-- Geometric shapes inspired by collages -->
+    <div class="geo-shape star-burst"></div>
+    <div class="geo-shape circle-red"></div>
+    <div class="geo-shape checker-pattern"></div>
+    <div class="geo-shape torn-paper"></div>
+  </div>
+  
+  <!-- Layer 4: Grain overlay -->
+  <div class="collage-layer collage-grain"></div>
+</div>
+
+<style>
+  .collage-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .collage-layer {
+    position: absolute;
+    inset: 0;
+  }
+  
+  /* Base texture - aged paper look */
+  .collage-texture {
+    background: 
+      radial-gradient(ellipse 120% 80% at 20% 10%, rgba(139, 111, 71, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 60% at 85% 90%, rgba(107, 122, 46, 0.06) 0%, transparent 45%),
+      linear-gradient(175deg, #f0e6d6 0%, #e8dcc8 40%, #d9cbb5 100%);
+  }
+  
+  /* Collage images layer */
+  .collage-images {
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+  }
+  
+  .collage-item {
+    position: absolute;
+    overflow: hidden;
+  }
+  
+  .collage-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%) contrast(1.1);
+  }
+  
+  /* Position each collage item around the edges */
+  .item-1 {
+    top: -5%;
+    left: -5%;
+    width: 35vw;
+    max-width: 400px;
+    height: 40vh;
+    transform: rotate(-8deg);
+    clip-path: polygon(10% 0%, 100% 5%, 95% 100%, 0% 90%);
+  }
+  
+  .item-2 {
+    top: 5%;
+    right: -8%;
+    width: 28vw;
+    max-width: 320px;
+    height: 45vh;
+    transform: rotate(12deg);
+    clip-path: polygon(5% 5%, 100% 0%, 95% 95%, 0% 100%);
+  }
+  
+  .item-3 {
+    top: 35%;
+    left: -10%;
+    width: 25vw;
+    max-width: 280px;
+    height: 50vh;
+    transform: rotate(-3deg);
+    clip-path: polygon(0% 10%, 100% 0%, 100% 95%, 5% 100%);
+  }
+  
+  .item-4 {
+    top: 25%;
+    right: -5%;
+    width: 30vw;
+    max-width: 350px;
+    height: 40vh;
+    transform: rotate(6deg);
+    clip-path: polygon(8% 0%, 100% 8%, 92% 100%, 0% 95%);
+  }
+  
+  .item-5 {
+    bottom: 5%;
+    left: -8%;
+    width: 32vw;
+    max-width: 380px;
+    height: 45vh;
+    transform: rotate(5deg);
+    clip-path: polygon(0% 5%, 95% 0%, 100% 100%, 8% 95%);
+  }
+  
+  .item-6 {
+    bottom: -5%;
+    right: -5%;
+    width: 35vw;
+    max-width: 400px;
+    height: 42vh;
+    transform: rotate(-10deg);
+    clip-path: polygon(5% 0%, 100% 10%, 95% 100%, 0% 90%);
+  }
+  
+  .item-7 {
+    top: 55%;
+    left: 5%;
+    width: 22vw;
+    max-width: 250px;
+    height: 35vh;
+    transform: rotate(-15deg);
+    opacity: 0.8;
+    clip-path: polygon(0% 0%, 100% 5%, 95% 100%, 5% 95%);
+  }
+  
+  .item-8 {
+    bottom: 30%;
+    right: 3%;
+    width: 24vw;
+    max-width: 270px;
+    height: 38vh;
+    transform: rotate(8deg);
+    opacity: 0.9;
+    clip-path: polygon(5% 5%, 95% 0%, 100% 100%, 0% 95%);
+  }
+  
+  /* Industrial elements */
+  .collage-industrial {
+    opacity: 0.06;
+  }
+  
+  .industrial-element {
+    position: absolute;
+    color: #2c2416;
+  }
+  
+  .crane-1 {
+    bottom: 0;
+    left: 5%;
+    width: 15vw;
+    max-width: 180px;
+    height: auto;
+    transform: scaleX(-1);
+  }
+  
+  .crane-2 {
+    bottom: 0;
+    right: 8%;
+    width: 12vw;
+    max-width: 150px;
+    height: auto;
+  }
+  
+  /* Container stacks */
+  .container-stack {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .container-box {
+    width: 60px;
+    height: 25px;
+    background: linear-gradient(90deg, #8b4513 0%, #a0522d 50%, #8b4513 100%);
+    border: 2px solid #2c2416;
+    opacity: 0.15;
+  }
+  
+  .stack-1 {
+    bottom: 10%;
+    left: 15%;
+    transform: rotate(-2deg);
+  }
+  
+  .stack-2 {
+    bottom: 8%;
+    right: 20%;
+    transform: rotate(3deg);
+  }
+  
+  .stack-1 .container-box:nth-child(2) {
+    background: linear-gradient(90deg, #cd5c5c 0%, #dc143c 50%, #cd5c5c 100%);
+    margin-left: 5px;
+  }
+  
+  .stack-1 .container-box:nth-child(3) {
+    background: linear-gradient(90deg, #4682b4 0%, #5f9ea0 50%, #4682b4 100%);
+    margin-left: -3px;
+  }
+  
+  .stack-2 .container-box:nth-child(1) {
+    background: linear-gradient(90deg, #daa520 0%, #ffd700 50%, #daa520 100%);
+  }
+  
+  .stack-2 .container-box:nth-child(2) {
+    background: linear-gradient(90deg, #228b22 0%, #32cd32 50%, #228b22 100%);
+    margin-left: 8px;
+  }
+  
+  /* Geometric shapes from collage aesthetic */
+  .geo-shape {
+    position: absolute;
+  }
+  
+  .star-burst {
+    top: 15%;
+    left: 20%;
+    width: 80px;
+    height: 80px;
+    background: #c41e3a;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    opacity: 0.08;
+    transform: rotate(15deg);
+  }
+  
+  .circle-red {
+    top: 40%;
+    right: 25%;
+    width: 50px;
+    height: 50px;
+    background: #c41e3a;
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+  
+  .checker-pattern {
+    bottom: 35%;
+    left: 10%;
+    width: 40px;
+    height: 40px;
+    background: 
+      linear-gradient(45deg, #2c2416 25%, transparent 25%),
+      linear-gradient(-45deg, #2c2416 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #2c2416 75%),
+      linear-gradient(-45deg, transparent 75%, #2c2416 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.08;
+    transform: rotate(-20deg);
+  }
+  
+  .torn-paper {
+    top: 60%;
+    right: 15%;
+    width: 100px;
+    height: 60px;
+    background: #f5f0e8;
+    clip-path: polygon(0% 20%, 15% 0%, 30% 15%, 50% 5%, 70% 20%, 85% 8%, 100% 25%, 95% 100%, 5% 95%);
+    opacity: 0.15;
+    transform: rotate(10deg);
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Grain overlay for texture */
+  .collage-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.5;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .collage-images {
+      opacity: 0.08;
+    }
+    
+    .collage-item {
+      max-width: 200px !important;
+    }
+    
+    .item-1, .item-2 {
+      display: none;
+    }
+    
+    .collage-industrial {
+      opacity: 0.04;
+    }
+    
+    .crane-1, .crane-2 {
+      max-width: 100px;
+    }
+    
+    .container-stack {
+      display: none;
+    }
+    
+    .geo-shape {
+      opacity: 0.05;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .collage-images {
+      opacity: 0.05;
+    }
+    
+    .item-3, .item-4 {
+      display: none;
+    }
+  }
+</style>
