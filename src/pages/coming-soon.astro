@@ -11,37 +11,6 @@ const baseUrl = import.meta.env.BASE_URL;
       flex-direction: column;
       align-items: center;
     }
-    .temp-logo-wrapper {
-      margin-bottom: 30px;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-    .temp-logo-text {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text-color);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-align: center;
-      line-height: 1.2;
-      background: rgba(255, 255, 255, 0.6);
-      border: 2px solid var(--warm-brown);
-      box-shadow: var(--shadow-soft);
-      border-radius: 50%;
-      width: 160px;
-      height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: float 5s ease-in-out infinite;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .temp-logo-text:hover {
-      transform: rotate(-5deg) scale(1.05);
-      box-shadow: var(--shadow-hover);
-    }
     .error-message {
       font-family: 'Comic Neue', cursive;
       font-size: 1.1rem;
@@ -81,10 +50,6 @@ const baseUrl = import.meta.env.BASE_URL;
   </style>
 
   <div class="container error-container">
-    <div class="temp-logo-wrapper">
-      <span class="temp-logo-text">Coming<br/>Soon</span>
-    </div>
-
     <h1 class="band-name">Nog even geduld!</h1>
 
     <div class="error-message">
