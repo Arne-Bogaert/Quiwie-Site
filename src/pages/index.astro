@@ -13,7 +13,7 @@ import TourList from '../components/TourList.astro';
       color: #faf9f6;
       padding: 14px 0;
       margin-bottom: 30px;
-      border-radius: 20px;
+      border-radius: 4px;
       white-space: nowrap;
       border: 3px solid var(--text-color);
       box-shadow: var(--shadow-soft);
@@ -28,7 +28,7 @@ import TourList from '../components/TourList.astro';
       font-weight: 600;
       text-transform: uppercase;
       font-size: 0.95rem;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
 
     @keyframes scroll-text {
@@ -45,7 +45,7 @@ import TourList from '../components/TourList.astro';
     }
 
     .marquee-container:hover {
-      transform: rotate(-1deg);
+      transform: rotate(-1deg) scale(1.01);
       box-shadow: var(--shadow-hover);
     }
   </style>
