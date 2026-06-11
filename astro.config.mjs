@@ -4,5 +4,7 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://quiwieband.vercel.app',
   base: '/',
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+  }),
 });
