@@ -1,16 +1,16 @@
 ---
-const { href, icon, imgSrc, title, color, isExternal = true, platform } = Astro.props;
+const { href, svgPath, svgWidth = 512, svgHeight = 512, imgSrc, title, color, isExternal = true, platform } = Astro.props;
 ---
 
-<a href={href} class="link-item" target={isExternal ? '_blank' : '_self'} data-platform={platform}>
+<a href={href} class="link-item" target={isExternal ? '_blank' : '_self'} rel={isExternal ? 'noopener noreferrer' : undefined} data-platform={platform}>
   <span class="link-icon-wrapper" style={`background: ${color || 'var(--accent-color)'}20;`}>
-    {
-      imgSrc ? (
-        <img src={imgSrc} alt={`${title} logo`} />
-      ) : (
-        <i class={icon} style={`color: ${color};`} />
-      )
-    }
+    {imgSrc ? (
+      <img src={imgSrc} alt="" width="20" height="20" />
+    ) : (
+      <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} width="20" height="20" aria-hidden="true" fill="currentColor" style={`color: ${color};`}>
+        <path d={svgPath} />
+      </svg>
+    )}
   </span>
   <span class="link-title">{title}</span>
 </a>
@@ -26,7 +26,7 @@ const { href, icon, imgSrc, title, color, isExternal = true, platform } = Astro.
     flex-shrink: 0;
     border: 2px solid var(--warm-brown);
     box-shadow: 2px 2px 0px var(--warm-brown);
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .link-item:hover .link-icon-wrapper {
     transform: rotate(-10deg) scale(1.1);

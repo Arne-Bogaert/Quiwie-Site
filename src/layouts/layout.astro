@@ -1,36 +1,42 @@
 ---
 import '../styles/global.css';
-import DesktopEdgeScene from '../components/DesktopEdgeScene.astro';
 import CollageBackground from '../components/CollageBackground.astro';
-const { title } = Astro.props;
-const showDesktopEdgeScene = false;
+const {
+  title,
+  description = 'Quiwie is een Vlaamse band. Kom kijken naar onze shows of luister via SoundCloud.',
+  ogImage = 'https://quiwieband.vercel.app/img/transparante%20logos/Volledig_Logo_Transparant.webp',
+} = Astro.props;
+const siteUrl = 'https://quiwieband.vercel.app';
 ---
 
 <!doctype html>
-<html lang="nl">
+<html lang="nl-BE" class="no-js">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{title}</title>
-<link
-  rel="icon"
-  href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥝</text></svg>"
-/>
+<meta name="description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Quiwie" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={siteUrl} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<link rel="icon" href="/img/favicon.ico" sizes="any" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-/>
 </head>
 <body>
 <CollageBackground />
-{showDesktopEdgeScene && <DesktopEdgeScene />}
 
-<div class="site-shell">
+<main class="site-shell">
   <slot />
-</div>
+</main>
 
 <style>
   .site-shell {
@@ -43,6 +49,8 @@ const showDesktopEdgeScene = false;
 </style>
 
 <script>
+  document.documentElement.classList.remove('no-js');
+
   const observerOptions = {
     threshold: 0.1,
   };
@@ -65,11 +73,12 @@ const showDesktopEdgeScene = false;
     const linkObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const items = entry.target.querySelectorAll('.link-item');
+          const items = entry.target.querySelectorAll<HTMLElement>('.link-item');
           items.forEach((item, i) => {
             setTimeout(() => {
               item.style.opacity = '1';
               item.style.transform = 'translateY(0)';
+              setTimeout(() => item.style.removeProperty('transition'), 400);
             }, i * 80);
           });
           linkObserver.unobserve(entry.target);
@@ -79,7 +88,7 @@ const showDesktopEdgeScene = false;
     linkObserver.observe(linksList);
 
     // Set initial state for link items
-    linksList.querySelectorAll('.link-item').forEach((item) => {
+    linksList.querySelectorAll<HTMLElement>('.link-item').forEach((item) => {
       item.style.opacity = '0';
       item.style.transform = 'translateY(15px)';
       item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';

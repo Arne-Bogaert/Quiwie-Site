@@ -10,6 +10,9 @@ const sortedTours = tours.sort(
 ---
 
 <div class="tour-list">
+  {sortedTours.length === 0 && (
+    <p class="tour-empty">Momenteel geen shows gepland.</p>
+  )}
   {
     sortedTours.map((tour) => (
       <div class="tour-item scroll-reveal">
@@ -19,8 +22,8 @@ const sortedTours = tours.sort(
           </span>
           <span class="tour-location">{tour.data.locatie}</span>
         </div>
-        <a href={tour.data.tickets} target="_blank" class="tour-btn">
-          Info&Tickets
+        <a href={tour.data.tickets} target="_blank" rel="noopener noreferrer" class="tour-btn">
+          Info & Tickets<span class="sr-only"> (opent in nieuw tabblad)</span>
         </a>
       </div>
     ))
@@ -34,6 +37,14 @@ const sortedTours = tours.sort(
     gap: 12px;
     margin-bottom: 25px;
   }
+  .tour-empty {
+    font-family: 'Comic Neue', cursive;
+    font-size: 0.9rem;
+    color: var(--warm-brown);
+    text-align: center;
+    padding: 20px 0;
+    margin: 0;
+  }
   .tour-item {
     display: flex;
     justify-content: space-between;
@@ -43,7 +54,10 @@ const sortedTours = tours.sort(
     border: 2px solid var(--warm-brown);
     border-radius: 18px;
     box-shadow: var(--shadow-soft);
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .tour-item:hover {
     transform: translateY(-4px) rotate(-1deg);
@@ -72,9 +86,9 @@ const sortedTours = tours.sort(
   }
   .tour-btn {
     background: var(--accent-color);
-    color: #faf9f6;
+    color: var(--off-white);
     text-decoration: none;
-    padding: 10px 18px;
+    padding: 13px 18px;
     border-radius: 14px;
     border: 2px solid var(--text-color);
     font-family: 'Fredoka', sans-serif;
@@ -82,7 +96,9 @@ const sortedTours = tours.sort(
     font-size: 0.85rem;
     letter-spacing: 0.3px;
     box-shadow: 2px 2px 0px var(--warm-brown);
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
   }
   .tour-btn:hover {

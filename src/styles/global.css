@@ -1,17 +1,15 @@
 :root {
-    /* Original warm collage palette */
-    --bg-color-start: #f5f0e8;
-    --bg-color-end: #e8dcc8;
-    --text-color: #2c2416;
-    --accent-color: #6b7a2e;
-    --accent-light: #8a9e3b;
-    --warm-brown: #8b6f47;
-    --warm-sand: #d4c4a8;
-    --button-bg: rgba(255, 255, 255, 0.75);
-    --button-hover: #ffffff;
-    --border-style: 3px solid #2c2416;
-    --shadow-soft: 4px 4px 0px rgba(44, 36, 22, 0.3);
-    --shadow-hover: 6px 6px 0px rgba(44, 36, 22, 0.35);
+    --text-color: oklch(13% 0.010 50);
+    --accent-color: oklch(13% 0.010 50);
+    --accent-light: oklch(32% 0.018 50);
+    --warm-brown: oklch(45% 0.055 50);
+    --warm-sand: oklch(88% 0.032 72);
+    --button-bg: oklch(97% 0.018 72 / 90%);
+    --button-hover: oklch(99% 0.012 72);
+    --border-style: 3px solid oklch(13% 0.010 50);
+    --shadow-soft: 4px 4px 0px oklch(28% 0.035 48 / 22%);
+    --shadow-hover: 6px 6px 0px oklch(28% 0.035 48 / 30%);
+    --off-white: oklch(97% 0.018 75);
 }
 
 @keyframes fadeInUp {
@@ -51,47 +49,6 @@ body {
     z-index: 1;
 }
 
-/* ---- Logo ---- */
-
-.logo-wrapper {
-    margin-bottom: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 140px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    padding: 10px;
-    box-shadow: var(--shadow-soft);
-    border: 2px solid var(--warm-brown);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo-wrapper:hover {
-    transform: rotate(-5deg) scale(1.05);
-    box-shadow: var(--shadow-hover);
-}
-
-.logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.logo-text {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-color);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.2;
-}
-
 /* ---- Header Logo ---- */
 
 .logo-header {
@@ -105,49 +62,13 @@ body {
     max-width: 380px;
     width: 100%;
     height: auto;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    filter: drop-shadow(3px 3px 0px var(--warm-sand)) drop-shadow(6px 6px 0px var(--warm-brown));
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.08)) drop-shadow(6px 6px 0px rgba(0,0,0,0.05));
 }
 
 .header-logo:hover {
     transform: scale(1.05) rotate(-2deg);
-    filter: drop-shadow(4px 4px 0px var(--accent-light)) drop-shadow(8px 8px 0px var(--accent-color));
-}
-
-/* ---- Band Name ---- */
-
-.band-name {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 3.2rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-    margin-top: 0;
-    letter-spacing: 2px;
-    color: var(--text-color);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: default;
-    display: inline-block;
-    position: relative;
-    text-shadow: 3px 3px 0px var(--warm-sand), 6px 6px 0px var(--warm-brown);
-}
-
-.band-name:hover {
-    letter-spacing: 5px;
-    color: var(--accent-color);
-    transform: scale(1.1) rotate(-2deg);
-    text-shadow: 4px 4px 0px var(--accent-light), 8px 8px 0px var(--accent-color);
-}
-
-/* ---- Tagline ---- */
-
-.tagline {
-    font-family: 'Comic Neue', cursive;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    margin-bottom: 28px;
-    margin-top: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.12)) drop-shadow(6px 6px 0px rgba(0,0,0,0.08));
 }
 
 /* ---- Divider ---- */
@@ -156,7 +77,7 @@ body {
     width: 80px;
     height: 4px;
     background: var(--text-color);
-    margin: 28px auto;
+    margin: 40px auto 36px;
     border-radius: 4px;
     position: relative;
 }
@@ -186,19 +107,13 @@ body {
 
 .section-title {
     font-family: 'Fredoka', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    margin-bottom: 14px;
-    color: var(--text-color);
+    margin-bottom: 16px;
+    color: var(--warm-brown);
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 4px;
-    background: var(--warm-sand);
-    display: inline-block;
-    padding: 6px 16px;
-    border-radius: 4px;
-    border: 2px solid var(--warm-brown);
-    box-shadow: 2px 2px 0px var(--warm-brown);
 }
 
 section {
@@ -228,6 +143,9 @@ section {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* ---- Link items ---- */
@@ -245,17 +163,19 @@ section {
     align-items: center;
     justify-content: flex-start;
     gap: 12px;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border: var(--border-style);
     box-shadow: var(--shadow-soft);
     position: relative;
     overflow: hidden;
 }
 
-.link-item i {
+.link-item svg {
     width: 20px;
     height: 20px;
-    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -278,138 +198,15 @@ section {
     border-color: var(--accent-color);
 }
 
-/* Spotify - soft green */
-.link-item[data-platform="spotify"]:hover {
-    background-color: #b8f0c8;
-    border-color: #1DB954;
+/* All platform hovers: clean B&W */
+.link-item[data-platform]:hover {
+    background-color: var(--warm-sand);
+    border-color: var(--text-color);
 }
 
-/* Instagram - soft pink */
-.link-item[data-platform="instagram"]:hover {
-    background-color: #ff6b9d;
-    border-color: #E4405F;
-}
-
-/* SoundCloud - soft orange */
-.link-item[data-platform="soundcloud"]:hover {
-    background-color: #ff9f43;
-    border-color: #FF5500;
-}
-
-/* VI.BE - soft purple */
-.link-item[data-platform="vibe"]:hover {
-    background-color: #d4a5e0;
-    border-color: #7B2D8E;
-}
-
-/* Facebook - soft blue */
-.link-item[data-platform="facebook"]:hover {
-    background-color: #6bcfff;
-    border-color: #1877F2;
-}
-
-/* Contact/Email - soft yellow */
-.link-item[data-platform="email"]:hover {
-    background-color: #ffd93d;
-    border-color: var(--warm-brown);
-}
-
-.link-item:hover i,
+.link-item:hover svg,
 .link-item:hover img {
     transform: scale(1.2);
-}
-
-/* ---- Newsletter ---- */
-
-.newsletter-box {
-    margin-top: 10px;
-    padding: 28px 24px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 6px;
-    border: 2px solid var(--warm-brown);
-    box-shadow: var(--shadow-soft);
-}
-
-.newsletter-title {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 6px;
-}
-
-.newsletter-subtitle {
-    font-family: 'Comic Neue', cursive;
-    font-size: 0.95rem;
-    color: var(--text-color);
-    margin-bottom: 18px;
-    font-weight: 700;
-}
-
-.newsletter-box input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 12px;
-    border: 2px solid var(--warm-brown);
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-family: 'Comic Neue', cursive;
-    font-size: 1rem;
-    font-weight: 700;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 3px 3px 0px var(--warm-brown);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.newsletter-box input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0px var(--accent-color);
-}
-
-.newsletter-box button {
-    width: 100%;
-    padding: 14px;
-    background-color: var(--accent-color);
-    color: #faf9f6;
-    border: 2px solid var(--text-color);
-    border-radius: 4px;
-    font-family: 'Fredoka', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    box-shadow: 3px 3px 0px var(--text-color);
-}
-
-.newsletter-box button:hover {
-    background-color: var(--accent-light);
-    transform: translate(-2px, -2px) rotate(-1deg);
-    box-shadow: 5px 5px 0px var(--text-color);
-}
-
-/* ---- SoundCloud caption ---- */
-
-.sc-caption {
-    font-size: 10px;
-    color: var(--warm-brown);
-    line-break: anywhere;
-    margin-top: 8px;
-    font-family: Interstate, sans-serif;
-    opacity: 0.7;
-}
-
-.sc-caption a {
-    color: var(--warm-brown);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.sc-caption a:hover {
-    color: var(--accent-color);
 }
 
 /* ---- Float animation ---- */
@@ -428,16 +225,12 @@ section {
     }
 }
 
-.logo-wrapper {
-    animation: float 5s ease-in-out infinite;
-}
-
 /* ---- Scroll reveal ---- */
 
 .scroll-reveal {
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.6s ease-out;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .scroll-reveal.visible {
@@ -445,18 +238,18 @@ section {
     transform: translateY(0);
 }
 
-/* Staggered delays for links */
-.links-list .link-item:nth-child(1) { transition-delay: 0s; }
-.links-list .link-item:nth-child(2) { transition-delay: 0.06s; }
-.links-list .link-item:nth-child(3) { transition-delay: 0.12s; }
-.links-list .link-item:nth-child(4) { transition-delay: 0.18s; }
-.links-list .link-item:nth-child(5) { transition-delay: 0.24s; }
-.links-list .link-item:nth-child(6) { transition-delay: 0.30s; }
+/* Staggered delays for links — selects by <li> position since links-list is a <ul> */
+.links-list li:nth-child(1) .link-item { transition-delay: 0s; }
+.links-list li:nth-child(2) .link-item { transition-delay: 0.06s; }
+.links-list li:nth-child(3) .link-item { transition-delay: 0.12s; }
+.links-list li:nth-child(4) .link-item { transition-delay: 0.18s; }
+.links-list li:nth-child(5) .link-item { transition-delay: 0.24s; }
+.links-list li:nth-child(6) .link-item { transition-delay: 0.30s; }
 
 /* ---- Footer ---- */
 
 .site-footer {
-    margin-top: 30px;
+    margin-top: 52px;
     padding: 20px 0 10px;
     text-align: center;
 }
@@ -468,6 +261,68 @@ section {
     font-weight: 500;
     letter-spacing: 1px;
     margin: 0;
+}
+
+/* ---- Desktop: slightly wider container ---- */
+
+@media (min-width: 640px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-header,
+    .logo-wrapper {
+        animation: none;
+    }
+
+    .marquee-content {
+        animation: none;
+        padding-left: 0;
+    }
+
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* ---- Screen-reader only utility ---- */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---- Focus visible ---- */
+
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* ---- No-JS fallback: make scroll-reveal content visible ---- */
+
+.no-js .scroll-reveal {
+    opacity: 1;
+    transform: none;
 }
 
 /* ---- Noise texture overlay removed - handled by CollageBackground ---- */
