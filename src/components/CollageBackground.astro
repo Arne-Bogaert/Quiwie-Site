@@ -23,8 +23,6 @@
     <div class="sketch-item i2c"><img src="/img/concept-art/Ontwerp%20zonder%20titel%20(2).webp" alt="" loading="lazy" /></div>
     <div class="sketch-item i0c"><img src="/img/concept-art/Ontwerp%20zonder%20titel.webp" alt="" loading="lazy" /></div>
   </div>
-
-  <div class="collage-layer collage-grain"></div>
 </div>
 
 <style>
@@ -41,8 +39,10 @@
     inset: 0;
   }
 
+  /* multiply: white paper takes on the warm cream, crease shadows stay */
   .collage-base {
-    background: oklch(97% 0.018 72);
+    background: oklch(97% 0.018 72) url("/img/achtergrond/papier.webp") center / cover no-repeat;
+    background-blend-mode: multiply;
   }
 
   /* darken blend: white image areas disappear on white base, ink lines stay */
@@ -88,14 +88,6 @@
   .i3c { bottom: 8%; left:  42%; width: 22vw; transform: rotate( -4deg); }
   .i2c { bottom: 5%; left:  63%; width: 20vw; transform: rotate( 10deg); }
   .i0c { bottom: 7%; left:  81%; width: 22vw; transform: rotate( -7deg); }
-
-  /* Grain overlay */
-  .collage-grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    opacity: 0.4;
-  }
 
   /* Tablet: hide middle row */
   @media (max-width: 768px) {
